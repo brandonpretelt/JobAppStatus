@@ -16,10 +16,10 @@ function loadEventListeners() {
 
 function getJobStatus() {
     // * this function grabs the job status and returns it
-    const UISelect = document.querySelector('.job-app-status___input-select');
-    const UISelect__option = UISelect.options[UISelect.selectedIndex].value;
+    const SelectEl = document.querySelector('.job-app-status___input-select');
+    const SelectEl__option = SelectEl.options[SelectEl.selectedIndex].value;
   
-    return UISelect__option;
+    return SelectEl__option;
     
   }
   
@@ -28,44 +28,44 @@ function getJobStatus() {
     
     // * This section grabs all the UI elements and creates what is needed. It also grabs the status from the getJobStatus function;
     const jobStatus = getJobStatus();
-    const UIiconEl = document.createElement('i');
-    const UIappListEl = document.querySelector('.application-list');
-    const UIappListOutEl = document.createElement('div');
-    const UISelect = document.querySelector('.job-app-status___input-select');
+    const iconEl = document.createElement('i');
+    // const UIappListEl = document.querySelector('.application-list');
+    // const UIappListOutEl = document.createElement('div');
+    const SelectEl = document.querySelector('.job-app-status___input-select');
     
-    const UISelect__optionText = UISelect.options[UISelect.selectedIndex].text;
-    const UIinputValue = document.querySelector('.job-app___input').value;
-    const UIDivEl = document.createElement('div');
-    const UIStatusDivEl = document.querySelector('.status');
+    // const SelectEl__optionText = SelectEl.options[SelectEl.selectedIndex].text;
+    const inputValueEl = document.querySelector('.job-app___input').value;
+    const divEl = document.createElement('div');
+    const statusDivEl = document.querySelector('.status');
     
-    if (UIinputValue === "") {
+    if (inputValueEl === "") {
       alert('Try again');
       document.querySelector('.job-app___input').focus();
-      UISelect.options[UISelect.selectedIndex] = 0;
+      SelectEl.options[SelectEl.selectedIndex] = 0;
     }
     
     if (jobStatus > -1 || jobStatus !== "") {
-      UIDivEl.appendChild(document.createTextNode(UIinputValue));
-      UIStatusDivEl.appendChild(UIDivEl);
+      divEl.appendChild(document.createTextNode(inputValueEl));
+      statusDivEl.appendChild(divEl);
 
       switch (jobStatus) {
         case 'accepted':
-          UIiconEl.className = 'fa fa-check';
-          UIDivEl.appendChild(UIiconEl);
-          UIStatusDivEl.appendChild(UIDivEl);
+          iconEl.className = 'fa fa-check';
+          divEl.appendChild(iconEl);
+          statusDivEl.appendChild(divEl);
           break;
 
         case 'rejected':
-          UIiconEl.className = 'fa fa-times';
-          UIDivEl.className = 'grid-layout';
-          UIDivEl.appendChild(UIiconEl);
-          UIStatusDivEl.appendChild(UIDivEl);
+          iconEl.className = 'fa fa-times';
+          divEl.className = 'grid-layout';
+          divEl.appendChild(iconEl);
+          statusDivEl.appendChild(divEl);
           break;
 
         case 'no-answer':
-          UIiconEl.className ='fa fa-question';
-          UIDivEl.appendChild(UIiconEl);
-          UIStatusDivEl.appendChild(UIDivEl);
+          iconEl.className ='fa fa-question';
+          divEl.appendChild(iconEl);
+          statusDivEl.appendChild(divEl);
           break;
 
         default:
@@ -73,24 +73,6 @@ function getJobStatus() {
           break;
       }
 
-      
-      /* if (jobStatus === "accepted") {
-        UIiconEl.className = "fa fa-check";
-        UIDivEl.appendChild(UIiconEl);
-        UIStatusDivEl.appendChild(UIDivEl);
-      }
-      
-      if (jobStatus === "no-answer") {
-        UIiconEl.className = "fa fa-question";
-        UIDivEl.appendChild(UIiconEl);
-        UIStatusDivEl.appendChild(UIDivEl);
-      }
-      
-      if (jobStatus === 'rejected') {
-        UIiconEl.className = "fa fa-times";
-        UIDivEl.appendChild(UIiconEl);
-        UIStatusDivEl.appendChild(UIDivEl);
-      } */
     }
 
     document.querySelector('.job-app___input').value = "";
