@@ -84,7 +84,7 @@ function addJobStatus(){
 }
 
 function saveJobApp(job_name) {
-  /** 
+  /**   
    * * This function takes in the name of the company/job app as a parameter and
    * * and saves it to the local storage for later use. 
    *
@@ -104,5 +104,12 @@ function saveJobApp(job_name) {
 
   console.log('saved');
 }
+
+function loadJobApp() {
+  const job = localStorage.getItem('job-apps');
+  return job;
+}
+
+console.log(loadJobApp); // testing out the load function
 
   
