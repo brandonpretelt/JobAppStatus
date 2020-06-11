@@ -2,8 +2,13 @@
  * ? This application is to monitor your job application status.
  * ? All you need to do is enter in your job application name and then wait. 
  * 
- * TODO: Implement Local Storage, Date Job Application Added, Date Job Application Response, custom modal for validation, regex validation
+ * // TODO: Implement Local Storage,
+ * TODO: Date Job Application Added, 
+ * TODO: Date Job Application Response, 
+ * TODO: custom modal for validation, 
+ * TODO: regex validation,
  * TODO: Add in drag n drop feature?
+ * TODO: Clear jobs onclick
  * 
  */
 
@@ -38,10 +43,6 @@ function addJobStatus(){
   const inputValueEl = document.querySelector('.job-app___input').value;
   const divEl = document.createElement('div');
   const statusDivEl = document.querySelector('.status');
-
-  // TESTING LOCALSTORAGE STUFF
-
-  saveJobApp(inputValueEl);
     
   if (inputValueEl === "") {
     alert('Try again');
@@ -80,6 +81,15 @@ function addJobStatus(){
 
   }
 
+
+  // TESTING LOCALSTORAGE STUFF
+
+  if (statusDivEl.innerHTML === null || statusDivEl.innerHTML === "") {
+    console.log('nope');
+  } else {
+    saveJobApp(statusDivEl.innerHTML);
+  }
+
   document.querySelector('.job-app___input').value = "";
 }
 
@@ -106,10 +116,16 @@ function saveJobApp(job_name) {
 }
 
 function loadJobApp() {
-  const job = localStorage.getItem('job-apps');
-  return job;
+  const jobs = JSON.parse(localStorage.getItem('job-apps'));
+  const statusDivEl = document.querySelector('.status');  
+  if (jobs === null) {
+    console.log('too bad')
+  } else {
+    for (let i = 0; i<jobs.length;i++) {
+      statusDivEl.innerHTML = jobs[i];
+    }
+    console.log(jobs);
+  }
 }
 
-console.log(loadJobApp); // testing out the load function
-
-  
+loadJobApp(); // testing out the load function  
