@@ -1,3 +1,12 @@
+/*
+* TODO: Rewrite the CSS and create a card layout. Match the design from figma
+*
+*/
+
+* {
+  box-sizing: border-box;
+}
+
 div {
     max-width: 100%;
     display: grid;
