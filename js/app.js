@@ -14,7 +14,8 @@
  * TODO: regex validation,
  * TODO: Add in drag n drop feature?,
  * TODO: Clear jobs onclick,
- * TODO: Work on variable naming convention,
+ * // TODO: Work on variable naming convention,
+ * TODO: Dynamically create and add card divs,
  * TODO: Ask for a code review 
  */
 
@@ -43,7 +44,7 @@ function addJobStatus(){
    * It also grabs the main status from the getJobStatus function
    * 
    * 
-   * TODO: Break out certain parts into their own functions so everything stays consistent and succinct.
+   * // TODO: Break out certain parts into their own functions so everything stays consistent and succinct.
    * TODO: Possibly implement getJobStatus into this function. 
    * 
    */
@@ -53,61 +54,37 @@ function addJobStatus(){
   const inputValue = document.querySelector('.job-app___input').value;
   const div = document.createElement('div');
   const statusDiv = document.querySelector('.status');
-  const select = document.querySelector('.job-app-status___input-select');
-
   
-  
-  if (inputValue === "" && jobStatus === "---") {
-    showModal('pop-up error', 'Enter a value and status, please');
-    document.querySelector('.job-app___input').focus();
-  } else if (inputValue !== "" && jobStatus !== "---") {
-     console.log(jobStatus);  
-    
-      div.appendChild(document.createTextNode(inputValue));
-      statusDiv.appendChild(div);
+  if (inputValue !== "" && jobStatus !== "---") {
+    div.append(document.createTextNode(inputValue));
+    statusDiv.appendChild(div);
 
-      switch (jobStatus) {
-        case 'accepted':
-          icon.className = 'fa fa-check';
-          div.appendChild(icon);
-          statusDiv.appendChild(div);
-        break;
+    switch (jobStatus) {
+      case 'accepted': // classValue = fa fa-check, el_a = icon, el_b = div, el_c = statusDiv
+          addStatusIndicator('fa fa-check', icon, div, statusDiv);
+      break;
 
-        case 'rejected':
-          icon.className = 'fa fa-times';
-          div.className = 'grid-layout';
-          div.appendChild(icon);
-          statusDiv.appendChild(div);
-        break;
+      case 'rejected':
+          addStatusIndicator('fa fa-times', icon, div, statusDiv);
+      break;
 
-        case 'no-answer':
-          icon.className ='fa fa-minus';
-          div.appendChild(icon);
-          statusDiv.appendChild(div);
-        break;
-
-        case '---':
-          showModal('pop-error', "Enter status");
-          select.focus();
-        break;
-
-      
-      }
-
-    
-    if (statusDiv.innerHTML === null || statusDiv.innerHTML === "") {
-      return;
-    } else if (jobStatus === '---') {
-      return;
-    } else if (jobStatus !== "---") {
-      saveJobApp(statusDiv.innerHTML);
+      case 'no-answer':
+          addStatusIndicator('fa fa-minus', icon, div, statusDiv);
+      break;
     }
+
+    saveJobApp(statusDiv.innerHTML);
+  } else {
+    showModal('pop-up error', 'Enter status and value');
   }
 
-
-  
-
   document.querySelector('.job-app___input').value = "";
+}
+
+function addStatusIndicator(classValue, el_a, el_b, el_c) {
+    el_a.className = classValue;
+    el_b.appendChild(el_a);
+    el_c.appendChild(el_b);
 }
 
 function saveJobApp(job_name) {
