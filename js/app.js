@@ -121,12 +121,14 @@ function loadJobAppStatus() {
   // * status div.
 
   const jobs = JSON.parse(localStorage.getItem('job-apps'));
-  const statusDivEl = document.querySelector('.status');  
-  if (jobs === null) {
-    alert('Unsuccessful load.');
-  } else {
-    for (let i = 0; i<jobs.length;i++) {
-      statusDivEl.innerHTML = jobs[i];
-    }
+  const statusDivEl = document.querySelector('.status');
+  
+  try {
+    jobs.forEach((job)=>{
+      statusDivEl.innerHTML = job;
+    });
+  } catch(e) {
+    console.log(e.message);
   }
+  
 }
