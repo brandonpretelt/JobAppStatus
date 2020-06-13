@@ -53,13 +53,16 @@ function addJobStatus(){
   const inputValue = document.querySelector('.job-app___input').value;
   const div = document.createElement('div');
   const statusDiv = document.querySelector('.status');
-    
-  if (inputValue === "") {
-    showModal('pop-up error', 'Enter a value, please');
+  const select = document.querySelector('.job-app-status___input-select');
+
+  
+  
+  if (inputValue === "" && jobStatus === "---") {
+    showModal('pop-up error', 'Enter a value and status, please');
     document.querySelector('.job-app___input').focus();
-  } else if (inputValue !== "") {
-      
-    if (jobStatus > -1 || jobStatus !== "") {
+  } else if (inputValue !== "" && jobStatus !== "---") {
+     console.log(jobStatus);  
+    
       div.appendChild(document.createTextNode(inputValue));
       statusDiv.appendChild(div);
 
@@ -84,13 +87,14 @@ function addJobStatus(){
         break;
 
         case '---':
-          showModal('pop-up error', 'Please enter a status type');
-          break;
+          showModal('pop-error', "Enter status");
+          select.focus();
+        break;
 
       
       }
 
-    }
+    
     if (statusDiv.innerHTML === null || statusDiv.innerHTML === "") {
       return;
     } else if (jobStatus === '---') {

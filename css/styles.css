@@ -3,9 +3,32 @@
 *
 */
 
+:root {
+  --main-bg-color: #aab;
+  --header-bg-color: #001199;
+  --gutter: 2%;
+}
+
 * {
   box-sizing: border-box;
+  font-family: sans-serif;
 }
+
+body, .container {
+  background-color: var(--main-bg-color);
+  color: #0f0f0f;
+}
+
+header {
+  display: flex;
+  justify-content: center;
+  background-color: var(--header-bg-color);
+}
+
+header h1 {
+  color: #fefefe;
+}
+
 
 button {
   max-width: 25%;
