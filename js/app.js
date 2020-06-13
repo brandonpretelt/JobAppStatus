@@ -1,7 +1,11 @@
 /***
- * ? This application is to monitor your job application status.
- * ? All you need to do is enter in your job application name and then wait. 
+ * Author: Brandon Pretelt
+ * Github: brandonpretelt
+ * Working Title: JobAppStatus
+ * Description: An easier way to track job applications. It is a Kanban style board. 
  * 
+ * 
+ * ? TODO LIST:  
  * // TODO: Implement Local Storage,
  * TODO: Work on the documentation, 
  * TODO: Date Job Application Added, 
@@ -10,7 +14,8 @@
  * TODO: regex validation,
  * TODO: Add in drag n drop feature?,
  * TODO: Clear jobs onclick,
- * TODO: Work on naming convention
+ * TODO: Work on variable naming convention,
+ * TODO: Ask for a code review 
  */
 
 'use strict';
