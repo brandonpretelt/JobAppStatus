@@ -6,7 +6,7 @@
  * TODO: Work on the documentation, 
  * TODO: Date Job Application Added, 
  * TODO: Date Job Application Response, 
- * TODO: custom modal for validation, 
+ * // TODO: custom modal, 
  * TODO: regex validation,
  * TODO: Add in drag n drop feature?,
  * TODO: Clear jobs onclick,
@@ -24,10 +24,10 @@ function loadEventListeners() {
 
 function getJobStatus() {
     // * this function grabs the job status and returns it
-    const SelectEl = document.querySelector('.job-app-status___input-select');
-    const SelectEl__option = SelectEl.options[SelectEl.selectedIndex].value;
-  
-    return SelectEl__option;
+    const select = document.querySelector('.job-app-status___input-select');
+    const select__option = select.options[select.selectedIndex].value;
+    
+    return select__option;
     
 }
   
@@ -44,52 +44,58 @@ function addJobStatus(){
    */
 
   const jobStatus = getJobStatus();
-  const iconEl = document.createElement('i');
-  const inputValueEl = document.querySelector('.job-app___input').value;
-  const divEl = document.createElement('div');
-  const statusDivEl = document.querySelector('.status');
+  const icon = document.createElement('i');
+  const inputValue = document.querySelector('.job-app___input').value;
+  const div = document.createElement('div');
+  const statusDiv = document.querySelector('.status');
     
-  if (inputValueEl === "") {
-    alert('Try again');
+  if (inputValue === "") {
+    showModal('pop-up error', 'Enter a value, please');
     document.querySelector('.job-app___input').focus();
-  } else if (inputValueEl !== "") {
+  } else if (inputValue !== "") {
       
     if (jobStatus > -1 || jobStatus !== "") {
-      divEl.appendChild(document.createTextNode(inputValueEl));
-      statusDivEl.appendChild(divEl);
+      div.appendChild(document.createTextNode(inputValue));
+      statusDiv.appendChild(div);
 
       switch (jobStatus) {
         case 'accepted':
-          iconEl.className = 'fa fa-check';
-          divEl.appendChild(iconEl);
-          statusDivEl.appendChild(divEl);
+          icon.className = 'fa fa-check';
+          div.appendChild(icon);
+          statusDiv.appendChild(div);
         break;
 
         case 'rejected':
-          iconEl.className = 'fa fa-times';
-          divEl.className = 'grid-layout';
-          divEl.appendChild(iconEl);
-          statusDivEl.appendChild(divEl);
+          icon.className = 'fa fa-times';
+          div.className = 'grid-layout';
+          div.appendChild(icon);
+          statusDiv.appendChild(div);
         break;
 
         case 'no-answer':
-          iconEl.className ='fa fa-question';
-          divEl.appendChild(iconEl);
-          statusDivEl.appendChild(divEl);
+          icon.className ='fa fa-minus';
+          div.appendChild(icon);
+          statusDiv.appendChild(div);
         break;
 
-        default:
+        case '---':
+          showModal('pop-up error', 'Please enter a status type');
           break;
+
+      
       }
 
     }
-}
-
-  if (statusDivEl.innerHTML === null || statusDivEl.innerHTML === "") {
-    return;
-  } else {
-    saveJobApp(statusDivEl.innerHTML);
+    if (statusDiv.innerHTML === null || statusDiv.innerHTML === "") {
+      return;
+    } else if (jobStatus === '---') {
+      return;
+    } else if (jobStatus !== "---") {
+      saveJobApp(statusDiv.innerHTML);
+    }
   }
+
+
   
 
   document.querySelector('.job-app___input').value = "";
@@ -111,9 +117,13 @@ function saveJobApp(job_name) {
 
   jobs.push(job_name);
 
-  localStorage.setItem('job-apps', JSON.stringify(jobs)); 
+  localStorage.setItem('job-apps', JSON.stringify(jobs));
+  
+  jobs.forEach((job)=>{
+    console.log(job);
+  })
 
-  alert("Saved successfully.")
+  showModal('pop-up confirm', 'Saved Successfully.');
 }
 
 function loadJobAppStatus() {
@@ -121,14 +131,34 @@ function loadJobAppStatus() {
   // * status div.
 
   const jobs = JSON.parse(localStorage.getItem('job-apps'));
-  const statusDivEl = document.querySelector('.status');
+  const statusDiv = document.querySelector('.status');
   
   try {
     jobs.forEach((job)=>{
-      statusDivEl.innerHTML = job;
+      statusDiv.innerHTML = job;
     });
   } catch(e) {
     console.log(`Error: ${e.message}`);
   }
 
+}
+
+function showModal(type, msg) {
+  // * Creates a modal depending on class TYPE and adds a MSG to it
+
+  const modalDiv = document.createElement('div');
+  
+  const card = document.querySelector('.card');
+  const container = document.querySelector('.container');
+  
+  modalDiv.className = type;
+  modalDiv.appendChild(document.createTextNode(msg));
+  
+  container.insertBefore(modalDiv, card);
+
+  setTimeout(clearModal, 3000);
+}
+
+function clearModal() {
+    document.querySelector('.pop-up').remove();
 }
