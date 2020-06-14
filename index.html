@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,34 +9,36 @@
     <link rel="stylesheet" href="css/styles.css">
     <title>Job Application Stauts</title>
 </head>
-<body>
-<div class="container">
-    <div class="card">
-        <header>
-        <h1> Job Application Status </h1>
-        </header>
-        <h2> Application List </h2>
-        <p> Enter your job application: </p>
-        <p><label for="job-app">Job Application Name: </label>
-        <input type="text" id="job-app" name="job-app" class="job-app___input"></p>
-        <p>Enter your job application status</p>
-        <p><label for="job-app-status">Job Application Status: </label>
-        <select name="job-app-status" id="job-app-status" class="job-app-status___input-select">
-            <option value="---" selected="selected"> --- </option>
-            <option value="accepted">Accepted</option>
-            <option value="rejected">Rejected</option>
-            <option value="no-answer">No Answer</option>
-        </select>
-        </p>
-        <button> Submit your application </button>
 
-        <div class="application-list">
-            <h3 class="job-app-name___heading"> Company  </h3>
-            <h3 class="status-indicator___heading">Status</h3>
-            <div class="status"></div>
+<body>
+    <div class="container">
+        <div class="card">
+            <header>
+                <h1> Job Application Status </h1>
+            </header>
+            <h2> Application List </h2>
+            <p> Enter your job application: </p>
+            <p><label for="job-app">Job Application Name: </label>
+                <input type="text" id="job-app" name="job-app" class="job-app___input"></p>
+            <p>Enter your job application status</p>
+            <p><label for="job-app-status">Job Application Status: </label>
+                <select name="job-app-status" id="job-app-status" class="job-app-status___input-select">
+                    <option value="---" selected="selected"> --- </option>
+                    <option value="accepted">Accepted</option>
+                    <option value="rejected">Rejected</option>
+                    <option value="no-answer">No Answer</option>
+                </select>
+            </p>
+            <button> Submit your application </button>
+
+            <div class="application-list">
+                <h3 class="job-app-name___heading"> Company </h3>
+                <h3 class="status-indicator___heading">Status</h3>
+                <div class="status"></div>
+            </div>
+        </div>
     </div>
-</div>
-</div>
-<script src="js/app.js"></script>
+    <script src="js/app.js"></script>
 </body>
+
 </html>
